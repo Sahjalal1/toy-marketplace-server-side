@@ -7,11 +7,15 @@ const port = process.env.PORT || 5000
 
 
 const app = express();
-app.use(cors());
+const corsOptions = {
+  origin:'*',
+  credentials: true,
+  optionSuccessStatus: 200,
+}
+app.use(cors(corsOptions))
 app.use(express.json());
 
-// toyShop
-// COjDGOLokYtcngg9
+
 
 /** mongoDB start **/
 
@@ -30,7 +34,7 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
+  
 
     const toysCollection = client.db("toysDB").collection("toys");
 
